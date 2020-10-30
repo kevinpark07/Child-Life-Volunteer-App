@@ -1,36 +1,28 @@
-import React, { useState } from 'react';
-import {Redirect } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import VolunteerLogin from '../Components/VolunteerLogin';
+import AdminLogin from '../Components/AdminLogin';
+import LoginHome from '../Components/LoginHome';
 
 
 
 
-function LoginContainer() {
 
-    const [volunteer, setVolunteer] = useState(false);
-    const [admin, setAdmin] = useState(false);
+class LoginContainer extends React.Component {
 
-    const clickHandle = event => {
-        if (event.target.name === "volunteer") {
-            setVolunteer(!volunteer);
-        } else if (event.target.name === "admin") {
-            setAdmin(!admin);
-        }
+
+    render () {
+        return (
+            <div>
+                <Switch>
+                    <Route path='/login/volunteer' render={ () => <VolunteerLogin />} />
+                    <Route path='/login/admin' render={ () => <AdminLogin />} />
+                    <Route path={'/login'} render={ () => <LoginHome />} />
+                </Switch>
+            </div>
+        )
     }
-
-  return (
-    <div>
-        {volunteer ? <Redirect to={'/login/volunteer'} /> : null}
-        {admin ? <Redirect to={'/login/admin'} /> : null}
-        <button name="volunteer" onClick={clickHandle}>
-            Volunteer
-        </button>
-        <button name="admin" onClick={clickHandle}>
-            Administrator
-        </button>
-    </div>
-  );
 }
-
 
 
 export default LoginContainer;

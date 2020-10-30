@@ -1,16 +1,16 @@
 import React from 'react';
-import VolNavBar from '../Components/VolNavBar'
+import AdminNavBar from '../Components/AdminNavBar'
 import DashCalendar from '../Components/DashCalendar'
 
 
 
-function VolunteerDashboard() {
+function VolunteerDashBoard() {
   return (
    <div>
-       <VolNavBar />
+       <AdminNavBar />
        <DashCalendar />
    </div>
   );
 }
 
-export default VolunteerDashboard;
+export default VolunteerDashBoard;

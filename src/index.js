@@ -7,9 +7,20 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-const rootReducer = (currentState = {user: ""}, action) => {
+const rootReducer = (currentState = {
+  user: "", 
+  interviews: [], 
+  volunteers: [],
+  admins: []
+  }, action) => {
   if (action.type === "LOGIN_USER") {
     return { ...currentState, user: action.payload }
+  } else if (action.type === "ADD_INTERVIEWS_FROM_FETCH") {
+    return { ...currentState, interviews: action.payload }
+  } else if (action.type === "ADD_VOLS_FROM_FETCH") {
+    return { ...currentState, volunteers: action.payload }
+  } else if (action.type === "ADD_ADMINS_FROM_FETCH") {
+    return { ...currentState, admins: action.payload }
   } else {
     return currentState
   }

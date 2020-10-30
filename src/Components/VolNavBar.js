@@ -18,6 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HistoryIcon from '@material-ui/icons/History';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { connect } from 'react-redux'
 
 const drawerWidth = 240;
 
@@ -82,7 +83,7 @@ const clickHandle = () => {
     console.log("I've Been Clicked")
 }
 
-export default function NavBar() {
+function VolNavBar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -115,7 +116,7 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Volunteer DashBoard
+            Welcome {props.user.name}!
           </Typography>
         </Toolbar>
       </AppBar>
@@ -159,3 +160,9 @@ export default function NavBar() {
     </div>
   );
 }
+
+const msp = (state) => {
+  return { user: state.user }
+}
+
+export default connect(msp, null)(VolNavBar);
