@@ -11,7 +11,8 @@ const rootReducer = (currentState = {
   user: "", 
   interviews: [], 
   volunteers: [],
-  admins: []
+  admins: [],
+  interview: ""
   }, action) => {
   if (action.type === "LOGIN_USER") {
     return { ...currentState, user: action.payload }
@@ -25,6 +26,14 @@ const rootReducer = (currentState = {
     return { ...currentState, volunteers: [...currentState.volunteers, action.payload] }
   } else if (action.type === "ADD_NEW_INTERVIEW") {
     return { ...currentState, interviews: [...currentState.interviews, action.payload] }
+  } else if (action.type === "EDIT_INTERVIEW") {
+    return { ...currentState, interview: action.payload }
+  } else if (action.type === "PATCH_INTERVIEW") {
+    let newArray = currentState.interviews.filter(int => int.id !== action.payload.id);
+    return { ...currentState, interviews: [...newArray, action.payload] }
+  } else if (action.type === "APPROVE_VOLUNTEER") {
+    let newArray = currentState.volunteers.filter(vol => vol.id !== action.payload.id);
+    return { ...currentState, interviews: [...newArray, action.payload] }
   } else {
     return currentState
   }

@@ -4,6 +4,7 @@ import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import Clock from 'react-live-clock';
+import InterviewContainer from '../Containers/InterviewContainer'
 
 
 function DashCalendar(props) {
@@ -23,6 +24,7 @@ function DashCalendar(props) {
             value={value}
         />
         </Container>
+        <InterviewContainer />
     </div>
   );
 }

@@ -12,7 +12,7 @@ export const getInterviews = () => {
         .then(resp => resp.json())
         .then(interviews => dispatch({type: "ADD_INTERVIEWS_FROM_FETCH", payload: interviews}))
     }
-}
+};
 
 export const getVols = () => {
     return function (dispatch) {
@@ -20,7 +20,7 @@ export const getVols = () => {
         .then(resp => resp.json())
         .then(vols => dispatch({type: "ADD_VOLS_FROM_FETCH", payload: vols}))
     }
-}
+};
 
 export const getAdmins = () => {
     return function (dispatch) {
@@ -28,7 +28,7 @@ export const getAdmins = () => {
         .then(resp => resp.json())
         .then(admins => dispatch({type: "ADD_ADMINS_FROM_FETCH", payload: admins}))
     }
-}
+};
 
 export const newVol = (formData) => {
     return function (dispatch) {
@@ -45,7 +45,7 @@ export const newVol = (formData) => {
             dispatch({ type: "LOGIN_USER", payload: newVol });
         })
     }
-}
+};
 
 export const newInterview = (interviewInfo) => {
     return function (dispatch) {
@@ -58,9 +58,43 @@ export const newInterview = (interviewInfo) => {
             body: JSON.stringify(interviewInfo)
         }).then(resp => resp.json()).then(interview => dispatch({type: "ADD_NEW_INTERVIEW", payload: interview}))
     }
+};
+
+export const editInterview = (interview) => ({ type: "EDIT_INTERVIEW", payload: interview });
+
+export const patchInterview = (interview, id) => {
+    return function (dispatch) {
+        fetch(INTERVIEW_URL + id, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+                accepts: "application/json"
+            },
+            body: JSON.stringify(interview)
+        })
+        .then(resp => resp.json())
+        .then(intObj => {
+            dispatch({type: "PATCH_INTERVIEW", payload: intObj});
+        })
+    }
+};
+
+export const patchApproval = (approval, id) => {
+    return function (dispatch) {
+        console.log(approval, id)
+        fetch(VOLUNTEER_URL + id, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+                accepts: "application/json"
+            },
+            body: JSON.stringify({approved: approval})
+        })
+        .then(resp => resp.json())
+        .then(volunteer => {
+            dispatch({type: "APPROVE_VOLUNTEER", payload: volunteer});
+        })
+    }
 }
 
-// interviews => dispatch({type: "ADD_INTERVIEWS_FROM_FETCH", payload: interviews})
 
-// ;
-//             dispatch({ type: "LOGIN_USER", payload: newVol });
