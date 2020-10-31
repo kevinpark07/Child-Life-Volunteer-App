@@ -35,7 +35,6 @@ const AdminLogin = (props) => {
         <>
         {redirect ? <Redirect to={'/admin/'} /> : null}
         <form onSubmit={submitHandle}>
-            {console.log(props.admins)}
             <h1>Administrator Log-In</h1>
             <label>E-mail</label>
             <p><input type="textfield" name="email" placeholder="E-mail" value={email} onChange={changeHandle} /></p>

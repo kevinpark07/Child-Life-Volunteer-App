@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HistoryIcon from '@material-ui/icons/History';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { connect } from 'react-redux'
 import {Redirect} from 'react-router-dom'
@@ -86,25 +87,49 @@ function AdminNavBar(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [archive, setArchive] = useState(false);
+  const [profile, setProfile] = useState(false);
+  const [dash, setDash] = useState(false);
+  const [signOut, setSignOut] = useState(false);
 
-  const clickHandle = (event) => {
-    console.log(event.target.textContent)
-    if (event.target.textContent === "Interview Archive") {
-        setArchive(!archive)
+
+    const profileHandle = () => {
+      setProfile(!profile);
+      setOpen(false);
     }
-}
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    const handleDrawerOpen = () => {
+      setOpen(true);
+      setProfile(false);
+      setDash(false);
+      setArchive(false);
+      setSignOut(false);
+    };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    const handleDrawerClose = () => {
+      setOpen(false);
+    };
+
+    const dashHandle = () => {
+      setDash(!dash);
+      setOpen(false);
+    }
+
+    const archiveHandle = () => {
+        setArchive(!archive);
+        setOpen(false);
+    }
+
+    const signOutHandle = () => {
+        setSignOut(!signOut);
+        setOpen(false);
+    }
 
   return (
     <div className={classes.root}>
+        {profile ? <Redirect to={`/admin/${props.user.id}`} /> : null}
         {archive ? <Redirect to={'/admin/archive'} /> : null}
+        {dash ? <Redirect to={'/admin'} /> : null}
+        {signOut ? <Redirect to={'/'} /> : null}
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -143,19 +168,25 @@ function AdminNavBar(props) {
         </div>
         <Divider />
         <List component="nav">
-         <ListItem button onClick={clickHandle}>
+         <ListItem button onClick={profileHandle}>
              <ListItemIcon>
                  <AccountCircleIcon />
              </ListItemIcon>
              <ListItemText primary="Profile" />
          </ListItem>
-         <ListItem button onClick={clickHandle}>
+         <ListItem button onClick={dashHandle}>
+             <ListItemIcon>
+                 <DashboardIcon />
+             </ListItemIcon>
+             <ListItemText primary="Dashboard" />
+         </ListItem>
+         <ListItem button onClick={archiveHandle}>
              <ListItemIcon>
                  <HistoryIcon />
              </ListItemIcon>
              <ListItemText primary="Interview Archive" />
          </ListItem>
-         <ListItem button onClick={clickHandle} >
+         <ListItem button onClick={signOutHandle} >
              <ListItemIcon>
                  <ExitToAppIcon />
              </ListItemIcon>

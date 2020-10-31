@@ -16,7 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import HistoryIcon from '@material-ui/icons/History';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
@@ -90,6 +90,8 @@ function VolNavBar(props) {
 
   const handleDrawerOpen = () => {
     setOpen(true);
+    setProfile(false);
+    setDashboard(false);
   };
 
   const handleDrawerClose = () => {
@@ -154,7 +156,7 @@ function VolNavBar(props) {
          </ListItem>
          <ListItem button onClick={dashboardRedirect}>
              <ListItemIcon>
-                 <HistoryIcon />
+                 <DashboardIcon />
              </ListItemIcon>
              <ListItemText primary="Dashboard" />
          </ListItem>

@@ -27,5 +27,4 @@ const Container = styled.div`
     text-align: left;
     left: 50%;
     top: 30%;
-}
 `

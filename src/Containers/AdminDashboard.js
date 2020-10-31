@@ -1,16 +1,38 @@
 import React from 'react';
-import AdminNavBar from '../Components/AdminNavBar'
-import DashCalendar from '../Components/DashCalendar'
+import AdminNavBar from '../Components/AdminNavBar';
+import AdminDashCalendar from '../Components/AdminDashCalendar';
+import AdminProfile from '../Components/AdminProfile';
+import InterviewArchive from '../Components/InterviewArchive';
+import {Switch, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 
 
-function VolunteerDashBoard() {
+function AdminDashBoard(props) {
   return (
    <div>
        <AdminNavBar />
-       <DashCalendar />
+       <Switch>
+       <Route path='/admin/archive' render={ () => <InterviewArchive />} />
+       <Route path={'/admin/:id'} render={(routerProps) => {
+                        let id = parseInt(routerProps.match.params.id);
+                        if (props.admins.length > 0) {
+                            let foundAdmin = props.admins.find(admin => admin.id === id);
+                            return (<AdminProfile admin={foundAdmin} />)
+                        }
+                    }} />
+       <Route path={'/admin'} render={() => <AdminDashCalendar />} />
+
+       </Switch>
    </div>
   );
 }
 
-export default VolunteerDashBoard;
+const msp = (state) => {
+  return { 
+      user: state.user, 
+      admins: state.admins
+   }
+}
+
+export default connect(msp)(AdminDashBoard);
