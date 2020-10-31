@@ -7,7 +7,8 @@ import AdminDashboard from './Containers/AdminDashboard';
 import { Route, Switch } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getVols, getAdmins, getInterviews} from './Redux/action';
-import InterviewArchive from './Components/InterviewArchive'
+import InterviewArchive from './Components/InterviewArchive';
+import SetInterview from './Components/SetInterview';
 
 
 
@@ -22,10 +23,12 @@ class App extends React.Component {
   render() {
       return (
         <div>
+          {console.log(this.props.user)}
           <Switch>
-            <Route path={'/admin/archive'} render={ () => <InterviewArchive />} />  
-            <Route path={'/volunteer'} render={ () => <VolunteerDashboard />} />
-            <Route path={'/admin'} render={ () => <AdminDashboard />} />
+            <Route path='/admin/archive' render={ () => <InterviewArchive />} />
+            <Route path='/setinterview' render={ () => <SetInterview />} />
+            <Route path='/volunteer' render={ () => <VolunteerDashboard />} />
+            <Route path='/admin' render={ () => <AdminDashboard />} />
             <Route path='/signup' render={ () => <SignUp />} />
             <Route path='/login' render={ () => <LoginContainer />} />
             <Route path='/' render={ () => <HomePage />} />

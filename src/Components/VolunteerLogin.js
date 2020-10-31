@@ -33,7 +33,6 @@ const VolunteerLogin = (props) => {
         <>
         {redirect ? <Redirect to={'/volunteer'} /> : null}
         <form onSubmit={submitHandle}>
-            {console.log(props.user)}
             <h1>Volunteer Log-In</h1>
             <label>E-mail</label>
             <p><input type="textfield" name="email" placeholder="E-mail" value={email} onChange={changeHandle} /></p>

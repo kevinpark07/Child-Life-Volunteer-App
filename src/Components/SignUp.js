@@ -1,7 +1,7 @@
-import { NaturePeopleOutlined } from '@material-ui/icons';
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {newVol} from '../Redux/action';
+import {newVol, loginUser} from '../Redux/action';
+import {Redirect} from 'react-router-dom';
 
 const SignUp = (props) => {
 
@@ -9,8 +9,9 @@ const SignUp = (props) => {
     const [age, setAge] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [secondPassword, setSecondPassword] = useState("")
+    const [secondPassword, setSecondPassword] = useState("");
     const [profileImage, setProfileImage] = useState("");
+    const [redirect, setRedirect] = useState(false);
 
     const changeHandle = (event) => {
         if (event.target.name === "name") {
@@ -39,7 +40,15 @@ const SignUp = (props) => {
         console.log(formData)
 
         if (password === secondPassword) {
-            props.submitHandle(formData)
+            if (props.volunteers.find(vol => vol.email === email)) {
+                alert("The email you used already has a Volunteer account.");
+                setEmail("");
+                setPassword("");
+            setSecondPassword("");
+            } else {
+                props.submitHandle(formData);
+                setRedirect(!redirect)
+            }
         } else {
             alert("Passwords do not match, please try again.");
             setName("");
@@ -53,6 +62,7 @@ const SignUp = (props) => {
 
     return (
         <div>
+            {redirect ? <Redirect to="/volunteer" /> : null}
             <h1>Sign-Up Page</h1>
             <form id="signup" onSubmit={submitHandle}>
                 <p><input type="text" name= "name" placeholder="Full Name" value={name} onChange={changeHandle} /></p>
@@ -67,8 +77,15 @@ const SignUp = (props) => {
     )
 }
 
-const mdp = dispatch => {
-    return { submitHandle:(newVolObj) => dispatch(newVol(newVolObj))}
+const msp = state => {
+    return { volunteers: state.volunteers }
 }
 
-export default connect(null, mdp)(SignUp);
+const mdp = dispatch => {
+    return { 
+        submitHandle:(newVolObj) => dispatch(newVol(newVolObj)),
+        loginHandle: (user) => dispatch(loginUser(user))
+    }
+}
+
+export default connect(msp, mdp)(SignUp);

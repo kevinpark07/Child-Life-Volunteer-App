@@ -21,6 +21,10 @@ const rootReducer = (currentState = {
     return { ...currentState, volunteers: action.payload }
   } else if (action.type === "ADD_ADMINS_FROM_FETCH") {
     return { ...currentState, admins: action.payload }
+  } else if (action.type === "ADD_NEW_VOLUNTEER") {
+    return { ...currentState, volunteers: [...currentState.volunteers, action.payload] }
+  } else if (action.type === "ADD_NEW_INTERVIEW") {
+    return { ...currentState, interviews: [...currentState.interviews, action.payload] }
   } else {
     return currentState
   }

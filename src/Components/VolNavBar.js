@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -18,7 +18,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HistoryIcon from '@material-ui/icons/History';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -79,14 +80,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const clickHandle = () => {
-    console.log("I've Been Clicked")
-}
 
 function VolNavBar(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [profile, setProfile] = useState(false);
+  const [dashboard, setDashboard] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -96,8 +96,18 @@ function VolNavBar(props) {
     setOpen(false);
   };
 
+  const profileRedirect = () => {
+    setProfile(!profile);
+  }
+
+  const dashboardRedirect = () => {
+    setDashboard(!dashboard);
+  }
+
   return (
     <div className={classes.root}>
+      {profile ? <Redirect to={`/volunteer/${props.user.id}`} /> : null }
+      {dashboard ? <Redirect to={"/volunteer"} /> : null }
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -136,17 +146,17 @@ function VolNavBar(props) {
         </div>
         <Divider />
         <List component="nav">
-         <ListItem button onClick={clickHandle}>
+         <ListItem button onClick={profileRedirect}>
              <ListItemIcon>
                  <AccountCircleIcon />
              </ListItemIcon>
              <ListItemText primary="Profile" />
          </ListItem>
-         <ListItem button>
+         <ListItem button onClick={dashboardRedirect}>
              <ListItemIcon>
                  <HistoryIcon />
              </ListItemIcon>
-             <ListItemText primary="History" />
+             <ListItemText primary="Dashboard" />
          </ListItem>
          <ListItem button>
              <ListItemIcon>
