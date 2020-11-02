@@ -19,8 +19,10 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HistoryIcon from '@material-ui/icons/History';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { connect } from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import ListIcon from '@material-ui/icons/List';
+import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
+import { signOutUser } from '../Redux/action'
 
 const drawerWidth = 240;
 
@@ -90,6 +92,7 @@ function AdminNavBar(props) {
   const [profile, setProfile] = useState(false);
   const [dash, setDash] = useState(false);
   const [signOut, setSignOut] = useState(false);
+  const [volunteer, setVolunteer] = useState(false);
 
 
     const profileHandle = () => {
@@ -103,6 +106,7 @@ function AdminNavBar(props) {
       setDash(false);
       setArchive(false);
       setSignOut(false);
+      setVolunteer(false);
     };
 
     const handleDrawerClose = () => {
@@ -122,6 +126,12 @@ function AdminNavBar(props) {
     const signOutHandle = () => {
         setSignOut(!signOut);
         setOpen(false);
+        props.signOutHandle();
+    }
+
+    const volunteerHandle = () => {
+      setVolunteer(!volunteer);
+      setOpen(false);
     }
 
   return (
@@ -130,6 +140,7 @@ function AdminNavBar(props) {
         {archive ? <Redirect to={'/admin/archive'} /> : null}
         {dash ? <Redirect to={'/admin'} /> : null}
         {signOut ? <Redirect to={'/'} /> : null}
+        {volunteer ? <Redirect to='/admin/roster' /> : null}
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -180,6 +191,12 @@ function AdminNavBar(props) {
              </ListItemIcon>
              <ListItemText primary="Dashboard" />
          </ListItem>
+         <ListItem button onClick={volunteerHandle}>
+             <ListItemIcon>
+                 <ListIcon />
+             </ListItemIcon>
+             <ListItemText primary="Volunteer Roster" />
+         </ListItem>
          <ListItem button onClick={archiveHandle}>
              <ListItemIcon>
                  <HistoryIcon />
@@ -203,4 +220,10 @@ const msp = (state) => {
     return { user: state.user }
   }
 
-export default connect(msp, null)(AdminNavBar);
+const mdp = (dispatch) => {
+    return {
+      signOutHandle: () => dispatch(signOutUser())
+    }
+  }
+
+export default connect(msp, mdp)(AdminNavBar);

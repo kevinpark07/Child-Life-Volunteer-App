@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Interview from './Interview';
+import styled from 'styled-components';
 
 class InterviewArchive extends React.Component {
 
@@ -11,10 +12,10 @@ class InterviewArchive extends React.Component {
     
     render () {
     return (
-        <div>
+        <Container>
             <h1>Archive</h1>
             {this.renderInterviews()}
-        </div>
+        </Container>
     )
     }
 }
@@ -27,3 +28,11 @@ const msp = (state) => {
 }
 
 export default connect(msp, null)(InterviewArchive);
+
+const Container = styled.div`
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 100%;
+    overflow: scroll;
+`

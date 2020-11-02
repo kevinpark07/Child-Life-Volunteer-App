@@ -20,6 +20,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import {signOutUser} from '../Redux/action'
 
 const drawerWidth = 240;
 
@@ -87,11 +88,13 @@ function VolNavBar(props) {
   const [open, setOpen] = useState(false);
   const [profile, setProfile] = useState(false);
   const [dashboard, setDashboard] = useState(false);
+  const [signOut, setSignOut] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
     setProfile(false);
     setDashboard(false);
+    setSignOut(false);
   };
 
   const handleDrawerClose = () => {
@@ -100,16 +103,25 @@ function VolNavBar(props) {
 
   const profileRedirect = () => {
     setProfile(!profile);
+    setOpen(false);
   }
 
   const dashboardRedirect = () => {
     setDashboard(!dashboard);
+    setOpen(false);
+  }
+
+  const signOutHandle = () => {
+    setSignOut(!signOut);
+    setOpen(false);
+    props.signOutHandle();
   }
 
   return (
     <div className={classes.root}>
       {profile ? <Redirect to={`/volunteer/${props.user.id}`} /> : null }
       {dashboard ? <Redirect to={"/volunteer"} /> : null }
+      {signOut ? <Redirect to={"/"} /> : null }
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -160,7 +172,7 @@ function VolNavBar(props) {
              </ListItemIcon>
              <ListItemText primary="Dashboard" />
          </ListItem>
-         <ListItem button>
+         <ListItem button onClick={signOutHandle} >
              <ListItemIcon>
                  <ExitToAppIcon />
              </ListItemIcon>
@@ -177,4 +189,10 @@ const msp = (state) => {
   return { user: state.user }
 }
 
-export default connect(msp, null)(VolNavBar);
+const mdp = (dispatch) => {
+  return {
+    signOutHandle: () => dispatch(signOutUser())
+  }
+}
+
+export default connect(msp, mdp)(VolNavBar);

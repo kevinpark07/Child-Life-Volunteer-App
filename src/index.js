@@ -33,7 +33,12 @@ const rootReducer = (currentState = {
     return { ...currentState, interviews: [...newArray, action.payload] }
   } else if (action.type === "APPROVE_VOLUNTEER") {
     let newArray = currentState.volunteers.filter(vol => vol.id !== action.payload.id);
-    return { ...currentState, interviews: [...newArray, action.payload] }
+    return { ...currentState, volunteers: [...newArray, action.payload] }
+  } else if (action.type === "EDIT_VOLUNTEER") {
+    let newArray = currentState.volunteers.filter(vol => vol.id !== action.payload.id);
+    return { ...currentState, volunteers: [...newArray, action.payload] }
+  } else if (action.type === "SIGNOUT_USER") {
+    return { ...currentState, user: ""} 
   } else {
     return currentState
   }

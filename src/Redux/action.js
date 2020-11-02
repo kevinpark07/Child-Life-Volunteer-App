@@ -97,4 +97,22 @@ export const patchApproval = (approval, id) => {
     }
 }
 
+export const signOutUser = () => ({ type: "SIGNOUT_USER" });
+
+
+// export const editVol = (formData, id) => {
+//     return function (dispatch) {
+//         fetch(VOLUNTEER_URL + id, {
+//             method: "PATCH",
+//             headers: {
+//                 accepts: "application/json"
+//             },
+//             body: formData
+//         })
+//         .then(resp => resp.json())
+//         .then(newVol => {
+//             dispatch({type: "EDIT_VOLUNTEER", payload: newVol});
+//         })
+//     }
+// };
 
