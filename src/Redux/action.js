@@ -2,6 +2,7 @@
 const VOLUNTEER_URL = "http://localhost:3000/volunteers/";
 const ADMINISTRATOR_URL = "http://localhost:3000/administrators/";
 const INTERVIEW_URL = "http://localhost:3000/interviews/";
+const MEETING_URL = "http://localhost:3000/meetings/";
 
 
 export const loginUser = (user) => ({ type: "LOGIN_USER", payload: user });
@@ -27,6 +28,14 @@ export const getAdmins = () => {
         fetch(ADMINISTRATOR_URL)
         .then(resp => resp.json())
         .then(admins => dispatch({type: "ADD_ADMINS_FROM_FETCH", payload: admins}))
+    }
+};
+
+export const getMeetings = () => {
+    return function (dispatch) {
+        fetch(MEETING_URL)
+        .then(resp => resp.json())
+        .then(meetings => dispatch({type: "ADD_MEETINGS_FROM_FETCH", payload: meetings}))
     }
 };
 
@@ -81,7 +90,6 @@ export const patchInterview = (interview, id) => {
 
 export const patchApproval = (approval, id) => {
     return function (dispatch) {
-        console.log(approval, id)
         fetch(VOLUNTEER_URL + id, {
             method: "PATCH",
             headers: {
@@ -99,6 +107,39 @@ export const patchApproval = (approval, id) => {
 
 export const signOutUser = () => ({ type: "SIGNOUT_USER" });
 
+export const deleteVol = (id) => {
+    return function (dispatch) {
+        fetch(VOLUNTEER_URL + id, {
+            method: "DELETE"
+        })
+        .then(resp => resp.json())
+        .then(deletedVol => {
+            dispatch({type: "REMOVE_VOLUNTEER", payload: deletedVol});
+        })
+    }
+}
+
+export const newMeeting = (meetingObj) => {
+    return function (dispatch) {
+        fetch(MEETING_URL, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                accepts: "application/json"
+            },
+            body: JSON.stringify(meetingObj)
+        })
+        .then(resp => resp.json())
+        .then(console.log)
+    }
+}
+
+
+// newMeeting => {
+//     dispatch({type: "ADD_MEETING", payload: newMeeting});
+// }
+
+// data => {dispatch({type: "REMOVE_VOLUNTEER", payload: data});}
 
 // export const editVol = (formData, id) => {
 //     return function (dispatch) {

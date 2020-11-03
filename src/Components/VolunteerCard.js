@@ -1,9 +1,15 @@
 import React from 'react';
+import {deleteVol} from '../Redux/action'
 import styled from 'styled-components';
+import {connect} from 'react-redux';
 
 
 
 const VolunteerCard = (props) => {
+
+    const clickHandle = () => {
+        props.clickHandle(props.volunteer.id)
+    }
 
     return(
             <Container>
@@ -11,11 +17,19 @@ const VolunteerCard = (props) => {
                 <h1>{props.volunteer.name}</h1>
                 <p><b>Age: </b> {props.volunteer.age}</p> 
                 <p><b>Email: </b> {props.volunteer.email}</p> 
+                <p><b>Approved?: </b> {props.volunteer.approved ? "Yes" : "No"}</p>
+                <p><button onClick={clickHandle}>Remove Volunteer</button></p>
             </Container>
     )
 }
 
-export default VolunteerCard;
+const mdp = (dispatch) => {
+    return { 
+        clickHandle: (id) => { dispatch(deleteVol(id))}
+    }
+}
+
+export default connect(null, mdp)(VolunteerCard);
 
 
 const Container = styled.div`

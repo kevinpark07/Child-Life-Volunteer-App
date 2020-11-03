@@ -17,7 +17,7 @@ const VolunteerProfile = (props) => {
             <h1>{props.volunteer.name}</h1>
             <p><b>Age: </b> {props.volunteer.age}</p> 
             <p><b>Email: </b> {props.volunteer.email}</p> 
-            <p><b>Approved:</b> {props.volunteer.approved ? "Yes":"No"}</p> 
+            <p><b>Approved: </b> {props.volunteer.approved ? "Yes":"No"}</p> 
             {/* <button onClick={changeHandle} >Edit Profile</button> */}
         </Container>
     )

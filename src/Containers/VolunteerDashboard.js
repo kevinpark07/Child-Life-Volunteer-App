@@ -4,6 +4,7 @@ import DashCalendar from '../Components/DashCalendar';
 // import EditProfile from '../Components/EditProfile';
 import {connect} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
+import VolMeetingContainer from './VolMeetingContainer';
 import VolunteerProfile from '../Components/VolunteerProfile';
 
 
@@ -15,6 +16,7 @@ function VolunteerDashboard(props) {
        <VolNavBar />
        <Switch>
          {/* <Route path={'/volunteer/:id/edit'} render={() => <EditProfile /> } /> */}
+          <Route path={'/volunteer/:id/meetings'} render={() => <VolMeetingContainer />} />
           <Route path={'/volunteer/:id'} render={(routerProps) => {
                         let id = parseInt(routerProps.match.params.id);
                         if (props.volunteers.length > 0) {

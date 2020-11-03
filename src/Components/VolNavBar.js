@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
@@ -89,12 +90,14 @@ function VolNavBar(props) {
   const [profile, setProfile] = useState(false);
   const [dashboard, setDashboard] = useState(false);
   const [signOut, setSignOut] = useState(false);
+  const [meeting, setMeeting] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
     setProfile(false);
     setDashboard(false);
     setSignOut(false);
+    setMeeting(false)
   };
 
   const handleDrawerClose = () => {
@@ -117,8 +120,14 @@ function VolNavBar(props) {
     props.signOutHandle();
   }
 
+  const meetingRedirect = () => {
+    setMeeting(!meeting);
+    setOpen(false);
+  }
+
   return (
     <div className={classes.root}>
+      {meeting ? <Redirect to={`/volunteer/${props.user.id}/meetings`} /> : null }
       {profile ? <Redirect to={`/volunteer/${props.user.id}`} /> : null }
       {dashboard ? <Redirect to={"/volunteer"} /> : null }
       {signOut ? <Redirect to={"/"} /> : null }
@@ -172,6 +181,16 @@ function VolNavBar(props) {
              </ListItemIcon>
              <ListItemText primary="Dashboard" />
          </ListItem>
+         {props.user.approved ? 
+         <ListItem button onClick={meetingRedirect}>
+             <ListItemIcon>
+                 <MeetingRoomIcon />
+             </ListItemIcon>
+             <ListItemText primary="Meet-Ups" />
+         </ListItem> 
+         :
+         null
+         }
          <ListItem button onClick={signOutHandle} >
              <ListItemIcon>
                  <ExitToAppIcon />

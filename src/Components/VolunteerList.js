@@ -7,8 +7,8 @@ import styled from 'styled-components';
 class VolunteerList extends React.Component {
 
     renderVolunteers = () => {
-        let approvedVolunteers = this.props.volunteers.filter(vol => vol.approved === true)
-        return approvedVolunteers.map(vol => <VolunteerCard key={vol.id} volunteer={vol} />)
+        // let approvedVolunteers = this.props.volunteers.filter(vol => vol.approved === true)
+        return this.props.volunteers.map(vol => <VolunteerCard key={vol.id} volunteer={vol} />)
     }
     
     render () {

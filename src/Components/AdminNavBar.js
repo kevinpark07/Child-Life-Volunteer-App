@@ -18,6 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HistoryIcon from '@material-ui/icons/History';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListIcon from '@material-ui/icons/List';
 import { connect } from 'react-redux';
@@ -93,7 +94,7 @@ function AdminNavBar(props) {
   const [dash, setDash] = useState(false);
   const [signOut, setSignOut] = useState(false);
   const [volunteer, setVolunteer] = useState(false);
-
+  const [meeting, setMeeting] = useState(false);
 
     const profileHandle = () => {
       setProfile(!profile);
@@ -107,6 +108,7 @@ function AdminNavBar(props) {
       setArchive(false);
       setSignOut(false);
       setVolunteer(false);
+      setMeeting(false);
     };
 
     const handleDrawerClose = () => {
@@ -134,13 +136,20 @@ function AdminNavBar(props) {
       setOpen(false);
     }
 
+    const meetingHandle = () => {
+      setMeeting(!meeting);
+      setOpen(false);
+    }
+
   return (
     <div className={classes.root}>
         {profile ? <Redirect to={`/admin/${props.user.id}`} /> : null}
         {archive ? <Redirect to={'/admin/archive'} /> : null}
+        {meeting ? <Redirect to='/admin/meetings' /> : null}
         {dash ? <Redirect to={'/admin'} /> : null}
-        {signOut ? <Redirect to={'/'} /> : null}
         {volunteer ? <Redirect to='/admin/roster' /> : null}
+        {signOut ? <Redirect to={'/'} /> : null}
+        
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -190,6 +199,12 @@ function AdminNavBar(props) {
                  <DashboardIcon />
              </ListItemIcon>
              <ListItemText primary="Dashboard" />
+         </ListItem>
+         <ListItem button onClick={meetingHandle}>
+             <ListItemIcon>
+                 <MeetingRoomIcon />
+             </ListItemIcon>
+             <ListItemText primary="Meet-Ups" />
          </ListItem>
          <ListItem button onClick={volunteerHandle}>
              <ListItemIcon>
