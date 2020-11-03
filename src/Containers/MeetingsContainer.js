@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux';
 import {newMeeting} from '../Redux/action';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import AdminMeetingCard from '../Components/AdminMeetingCard';
 import styled from 'styled-components';
 
@@ -14,6 +16,8 @@ const MeetingContainer = (props) => {
     const [age, setAge] = useState("");
     const [info, setInfo] = useState("");
     const [link, setLink] = useState("");
+    const [volunteer, setVolunteer] = useState("")
+    const [inputValue, setInputValue] = useState("");
 
     const renderMeetings = () => {
         return props.meetings.map(meeting => <AdminMeetingCard key={meeting.id} meeting={meeting} />)
@@ -41,13 +45,15 @@ const MeetingContainer = (props) => {
 
     const submitHandle = (event) => {
         event.preventDefault();
+        let chosenVol = props.volunteers.find(vol => vol.name === volunteer)
         let newMeeting = {
             date: date,
             time: time, 
             patient_name: name,
             patient_age: age,
             patient_info: info,
-            link: link
+            link: link,
+            volunteer: chosenVol.id
         }
         props.submitHandle(newMeeting);
         setDate("");
@@ -56,8 +62,12 @@ const MeetingContainer = (props) => {
         setAge("");
         setLink("");
         setInfo("");
+        setVolunteer("");
     }
 
+    const approvedVols = () => {
+        return props.volunteers.filter(vol => vol.approved === true)
+    }
 
     return (
         <Container>
@@ -65,6 +75,19 @@ const MeetingContainer = (props) => {
             {
             form ? 
                 <Form onSubmit={submitHandle}>
+                    <StyledAutocomplete
+                    value={volunteer}
+                    onChange={(event, newVol) => {
+                    setVolunteer(newVol);
+                    }}
+                    inputValue={inputValue}
+                    onInputChange={(event, newInputValue) => {
+                    setInputValue(newInputValue);
+                    }}
+                    id="controllable-states-demo"
+                    options={approvedVols().map(vol => vol.name)}
+                    renderInput={(params) => <TextField {...params} label="Search Volunteer" variant="outlined" />}
+                />
                     <p><b>Date </b><input type="date" name="date" value={date} onChange={changeHandle} /></p>
                     <p><b>Time </b><input type="time" name="time" value={time} onChange={changeHandle} /></p>
                     <p><b>Zoom Link </b><input type="text" name="link" placeholder="Enter Link Here" value={link} onChange={changeHandle} /></p>
@@ -84,7 +107,8 @@ const MeetingContainer = (props) => {
 const msp = state => {
     return {
         user: state.user,
-        meetings: state.meetings
+        meetings: state.meetings, 
+        volunteers: state.volunteers
     }
 }
 
@@ -99,6 +123,7 @@ const Container = styled.div`
     top: 20%;
     left: 20%;
     width: 100%;
+    padding: 5%;
     overflow: scroll;
 `
 
@@ -109,4 +134,9 @@ const Form = styled.form`
 const TextArea = styled.textarea`
     height: 100px;
     width: 350px;
+`
+const StyledAutocomplete = styled(Autocomplete)`
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 3%;
 `

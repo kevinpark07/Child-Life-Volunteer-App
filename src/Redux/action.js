@@ -130,14 +130,31 @@ export const newMeeting = (meetingObj) => {
             body: JSON.stringify(meetingObj)
         })
         .then(resp => resp.json())
-        .then(console.log)
+        .then(newMeeting => {
+            dispatch({type: "ADD_MEETING", payload: newMeeting});
+        })
     }
 }
 
+export const addNotes = (meeting) => ({ type: "MEETING_NOTES", payload: meeting });
 
-// newMeeting => {
-//     dispatch({type: "ADD_MEETING", payload: newMeeting});
-// }
+export const patchMeeting = (note, id) => {
+    return function (dispatch) {
+        fetch(MEETING_URL + id, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+                accepts: "application/json"
+            },
+            body: JSON.stringify(note)
+        })
+        .then(resp => resp.json())
+        .then(meetObj => {
+            dispatch({type: "PATCH_MEETING", payload: meetObj});
+        })
+    }
+};
+
 
 // data => {dispatch({type: "REMOVE_VOLUNTEER", payload: data});}
 

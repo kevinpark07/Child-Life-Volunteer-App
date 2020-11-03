@@ -9,7 +9,7 @@ const Interview = (props) => {
             <p><b>Volunteer: </b> {props.volunteers.find(vol => vol.id === props.interview.volunteer_id).name}</p>
             <p><b>Date: </b> {props.interview.date}</p>
             <p><b>Time: </b> {props.interview.time}</p>
-            <p><b>Approved: </b> {props.volunteers.find(vol => vol.id === props.interview.volunteer_id).approved}</p>
+            <p><b>Approved: </b> {props.volunteers.find(vol => vol.id === props.interview.volunteer_id).approved ? "Yes" : "No"}</p>
             <p><b>Notes: </b> {props.interview.notes}</p>
         </Container>
     )

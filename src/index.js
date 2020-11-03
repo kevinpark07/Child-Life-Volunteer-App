@@ -13,7 +13,8 @@ const rootReducer = (currentState = {
   volunteers: [],
   admins: [],
   meetings: [],
-  interview: ""
+  interview: "",
+  meeting: ""
   }, action) => {
   if (action.type === "LOGIN_USER") {
     return { ...currentState, user: action.payload }
@@ -47,6 +48,11 @@ const rootReducer = (currentState = {
     return { ...currentState, volunteers: newArray} 
   } else if (action.type === "ADD_MEETING") {
     return { ...currentState, meetings: [...currentState.meetings, action.payload]} 
+  } else if (action.type === "MEETING_NOTES") {
+    return { ...currentState, meeting: action.payload }
+  } else if (action.type === "PATCH_MEETING") {
+    let newArray = currentState.meetings.filter(meet => meet.id !== action.payload.id);
+    return { ...currentState, meetings: [...newArray, action.payload] }
   } else {
     return currentState
   }

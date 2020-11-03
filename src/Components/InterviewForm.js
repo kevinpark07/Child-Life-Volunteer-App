@@ -27,14 +27,17 @@ const InterviewForm = (props) => {
 
     const submitHandle = (event) => {
         event.preventDefault()
-        let interviewObj = {
+        let dateTimeObj = {
             date: date,
             time: time, 
-            notes: notes
         }
-
-        props.submitHandler(interviewObj, props.interview.id);
-        props.approveHandle(approved, props.interview.volunteer_id);
+        let noteObj = {notes: notes}
+        if (notes === "") {
+            props.submitHandler(dateTimeObj, props.interview.id);
+        } else {
+            props.submitHandler(noteObj, props.interview.id);
+            props.approveHandle(approved, props.interview.volunteer_id);
+        }
 
         setRedirect(!redirect)
     }

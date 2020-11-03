@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Clock from 'react-live-clock';
+import AssignedMeetingsContainer from '../Containers/AssignedMeetingsContainer';
 
 
 function DashCalendar(props) {
@@ -13,7 +14,7 @@ function DashCalendar(props) {
   return (
     <div>
         {props.user.approved ? 
-          null
+          <AssignedMeetingsContainer />
           :
           props.interviews.find(interview => interview.volunteer_id === props.user.id) ? 
           <Header>Interview Pending...</Header> 
