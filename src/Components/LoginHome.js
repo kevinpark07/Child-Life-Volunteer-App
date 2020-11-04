@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 
 const LoginHome = () => {
 
@@ -15,17 +16,24 @@ const LoginHome = () => {
     }
 
     return(
-        <div>
+        <Container>
             {volunteer ? <Redirect to={'/login/volunteer'} /> : null}
             {admin ? <Redirect to={'/login/admin'} /> : null}
-            <button name="volunteer" onClick={clickHandle}>
+            <p><button name="volunteer" onClick={clickHandle}>
                 Volunteer
-            </button>
-            <button name="admin" onClick={clickHandle}>
+            </button></p>
+            <p><button name="admin" onClick={clickHandle}>
                 Administrator
-            </button>
-        </div>
+            </button></p>
+        </Container>
     )
 }
 
 export default LoginHome;
+
+const Container = styled.div`
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    text-align: center;
+`

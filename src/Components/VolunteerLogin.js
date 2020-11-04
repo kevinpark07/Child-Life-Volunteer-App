@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { loginUser } from '../Redux/action'
-import {Redirect} from 'react-router-dom'
+import { loginUser } from '../Redux/action';
+import {Redirect} from 'react-router-dom';
+import styled from 'styled-components';
 
 const VolunteerLogin = (props) => {
     
@@ -30,7 +31,7 @@ const VolunteerLogin = (props) => {
     }
     
     return (
-        <>
+        <Container>
         {redirect ? <Redirect to={'/volunteer'} /> : null}
         <form onSubmit={submitHandle}>
             <h1>Volunteer Log-In</h1>
@@ -40,7 +41,7 @@ const VolunteerLogin = (props) => {
             <p><input type="password" name="password" placeholder="Password" value={password} onChange={changeHandle} /></p>
             <button type="submit">Log-In</button>
         </form>
-        </>
+        </Container>
     )
 }
 
@@ -57,3 +58,9 @@ const mdp = (dispatch) => {
 }
 
 export default connect(msp, mdp)(VolunteerLogin);
+
+const Container = styled.div`
+    postion: absolute;
+    left: 50%;
+    top: 20%;
+`

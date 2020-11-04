@@ -1,18 +1,25 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
+import styled from 'styled-components';
 
 const HomePage = () => {
     return (
-        <div>
-            <h1>Home Page</h1>
+        <Container>
             <NavLink to={'/login'}>
                 <p>Log-In</p>
             </NavLink>
             <NavLink to={'/signup'}>
                 <p>Sign-Up</p>
             </NavLink>
-        </div>
+        </Container>
     )
 }
 
 export default HomePage;
+
+const Container = styled.div`
+    position: absolute;
+    left: 45%;
+    top: 40%;
+    text-align: center;
+`
