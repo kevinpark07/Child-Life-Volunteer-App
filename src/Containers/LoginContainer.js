@@ -14,10 +14,11 @@ class LoginContainer extends React.Component {
     render () {
         return (
             <div>
+                <LoginHome />
                 <Switch>
                     <Route path='/login/volunteer' render={ () => <VolunteerLogin />} />
                     <Route path='/login/admin' render={ () => <AdminLogin />} />
-                    <Route path={'/login'} render={ () => <LoginHome />} />
+                    {/* <Route path={'/login'} render={ () => <LoginHome />} /> */}
                 </Switch>
             </div>
         )

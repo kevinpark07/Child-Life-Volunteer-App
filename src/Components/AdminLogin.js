@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { loginUser } from '../Redux/action'
-import {Redirect} from 'react-router-dom'
+import { loginUser } from '../Redux/action';
+import {Redirect} from 'react-router-dom';
+import styled from 'styled-components';
 
 const AdminLogin = (props) => {
     
@@ -32,7 +33,7 @@ const AdminLogin = (props) => {
     }
     
     return (
-        <>
+        <Container>
         {redirect ? <Redirect to={'/admin/'} /> : null}
         <form onSubmit={submitHandle}>
             <h1>Administrator Log-In</h1>
@@ -42,20 +43,25 @@ const AdminLogin = (props) => {
             <p><input type="password" name="password" placeholder="Password" value={password} onChange={changeHandle} /></p>
             <button type="submit">Log-In</button>
         </form>
-        </>
+        </Container>
     )
 }
 
 const msp = (state) => {
     return { 
         user: state.user,
-        admins: state.admins,
+        admins: state.admins
      }
 }
 
 
 const mdp = (dispatch) => {
-    return { submitHandle: (user) => dispatch(loginUser(user))}
+    return { submitHandle: (user) => dispatch(loginUser(user)) }
 }
 
 export default connect(msp, mdp)(AdminLogin);
+
+const Container = styled.div`
+    margin-top: 20%;
+    text-align: center;
+`

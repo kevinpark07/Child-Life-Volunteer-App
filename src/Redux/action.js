@@ -155,6 +155,8 @@ export const patchMeeting = (note, id) => {
     }
 };
 
+export const adminLogin = () => ({ type: "ADMIN_LOGIN" });
+
 
 // data => {dispatch({type: "REMOVE_VOLUNTEER", payload: data});}
 

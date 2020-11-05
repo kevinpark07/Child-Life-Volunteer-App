@@ -60,7 +60,6 @@ const mdp = (dispatch) => {
 export default connect(msp, mdp)(VolunteerLogin);
 
 const Container = styled.div`
-    postion: absolute;
-    left: 50%;
-    top: 20%;
+    margin-top: 20%;
+    text-align: center;
 `
