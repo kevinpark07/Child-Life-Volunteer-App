@@ -1,17 +1,57 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
+import FingerprintIcon from '@material-ui/icons/Fingerprint';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+
+const TEDDY_BACKGROUND = "https://images.unsplash.com/photo-1585435421671-0c16764628ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1218&q=80"
+
+const useStyles = makeStyles((theme) => ({
+    button: {
+      margin: theme.spacing(1),
+    },
+  }));
 
 const HomePage = () => {
+
+    const classes = useStyles();
+
     return (
+        <div>
+        <Background alt="teddy" src={TEDDY_BACKGROUND} />
+        <Header>Child Life Volunteer Portal</Header>
         <Container>
-            <NavLink to={'/login'}>
-                <p>Log-In</p>
-            </NavLink>
-            <NavLink to={'/signup'}>
-                <p>Sign-Up</p>
-            </NavLink>
+            <Link to={'/login'}>
+                <p>
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        size="large"
+                        className={classes.button}
+                        startIcon={<FingerprintIcon />}
+                    >
+                    Log-In
+                    </Button>
+                </p>
+            </Link>
+            <br></br>
+            <Link to={'/signup'}>
+                <p>
+                     <Button
+                        variant="outlined"
+                        color="secondary"
+                        size="large"
+                        className={classes.button}
+                        startIcon={<AssignmentIndIcon />}
+                    >
+                    Sign-Up
+                    </Button>
+                </p>
+            </Link>   
         </Container>
+        </div>
     )
 }
 
@@ -19,7 +59,27 @@ export default HomePage;
 
 const Container = styled.div`
     position: absolute;
-    left: 45%;
-    top: 40%;
+    right: 22%;
+    top: 30%;
     text-align: center;
+    z-index: 1;
+`
+const Background = styled.img`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: - 1;
+`
+
+const Link = styled(NavLink)`
+    text-decoration: none;
+`
+const Header = styled.h1`
+    position: absolute;
+    right: 5%;
+    top: 2%;
+    font-family: Chalkduster, fantasy;
+    color: #f44336;
+    z-index: 1;
+    zoom: 150%;
 `

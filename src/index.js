@@ -55,8 +55,6 @@ const rootReducer = (currentState = {
   } else if (action.type === "PATCH_MEETING") {
     let newArray = currentState.meetings.filter(meet => meet.id !== action.payload.id);
     return { ...currentState, meetings: [...newArray, action.payload] }
-  } else if (action.type === "ADMIN_LOGIN") {
-    return { ...currentState, adminLogin: true, volLogin:false}
   } else {
     return currentState
   }

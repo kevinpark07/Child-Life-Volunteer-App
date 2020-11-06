@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { loginUser } from '../Redux/action';
 import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const VolunteerLogin = (props) => {
     
@@ -32,15 +34,34 @@ const VolunteerLogin = (props) => {
     
     return (
         <Container>
-        {redirect ? <Redirect to={'/volunteer'} /> : null}
-        <form onSubmit={submitHandle}>
-            <h1>Volunteer Log-In</h1>
-            <label>E-mail</label>
-            <p><input type="textfield" name="email" placeholder="E-mail" value={email} onChange={changeHandle} /></p>
-            <label>Password</label>
-            <p><input type="password" name="password" placeholder="Password" value={password} onChange={changeHandle} /></p>
-            <button type="submit">Log-In</button>
-        </form>
+            <form onSubmit={submitHandle} autoComplete="on">
+                {redirect ? <Redirect to={'/volunteer'} /> : null}
+                <Header>Volunteer Log-In</Header>
+                <TextField
+                    required  
+                    label="Email"  
+                    name="email"
+                    variant="outlined"
+                    value={email} 
+                    onChange={changeHandle}/>
+                    <br></br>
+                    <br></br>
+                    <TextField
+                        required 
+                        label="Password"
+                        type="password"
+                        name="password"
+                        variant="outlined"
+                        value={password} 
+                        onChange={changeHandle}
+                    />
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <Button type="submit" variant="contained" color="secondary">
+                        Log-In
+                    </Button>
+            </form>
         </Container>
     )
 }
@@ -60,6 +81,15 @@ const mdp = (dispatch) => {
 export default connect(msp, mdp)(VolunteerLogin);
 
 const Container = styled.div`
-    margin-top: 20%;
+    position: absolute;
+    right: 18%;
+    top: 35%;
     text-align: center;
+    z-index: 1;
+    color: #f44336;
+`
+
+const Header = styled.h1`
+    font-family: Marker Felt, fantasy;
+    color: #f44336;
 `
