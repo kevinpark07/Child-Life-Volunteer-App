@@ -33,7 +33,7 @@ export default connect(msp)(VolMeetingContainer);
 const Container = styled.div`
     position: absolute;
     top: 20%;
-    left: 20%;
+    left: 10%;
     width: 100%;
     overflow: scroll;
 `

@@ -23,7 +23,6 @@ class App extends React.Component {
   render() {
       return (
         <div>
-          {console.log(this.props.meetings)}
           <Switch>
             <Route path='/setinterview' render={ () => <SetInterview />} />
             <Route path='/volunteer' render={ () => <VolunteerDashboard />} />

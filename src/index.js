@@ -62,8 +62,6 @@ const rootReducer = (currentState = {
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
-console.log("Store: ", store)
-
 ReactDOM.render(
   <Provider store={store} >
     <Router>

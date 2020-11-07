@@ -25,7 +25,7 @@ const HomePage = () => {
         <Container>
             <Link to={'/login'}>
                 <p>
-                    <Button
+                    <BigButton
                         variant="outlined"
                         color="secondary"
                         size="large"
@@ -33,13 +33,13 @@ const HomePage = () => {
                         startIcon={<FingerprintIcon />}
                     >
                     Log-In
-                    </Button>
+                    </BigButton>
                 </p>
             </Link>
             <br></br>
             <Link to={'/signup'}>
                 <p>
-                     <Button
+                     <BigButton
                         variant="outlined"
                         color="secondary"
                         size="large"
@@ -47,7 +47,7 @@ const HomePage = () => {
                         startIcon={<AssignmentIndIcon />}
                     >
                     Sign-Up
-                    </Button>
+                    </BigButton>
                 </p>
             </Link>   
         </Container>
@@ -59,7 +59,7 @@ export default HomePage;
 
 const Container = styled.div`
     position: absolute;
-    right: 22%;
+    right: 17%;
     top: 30%;
     text-align: center;
     z-index: 1;
@@ -69,6 +69,10 @@ const Background = styled.img`
     width: 100%;
     height: 100%;
     z-index: - 1;
+`
+
+const BigButton = styled(Button)`
+    zoom: 150%
 `
 
 const Link = styled(NavLink)`

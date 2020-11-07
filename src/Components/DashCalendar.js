@@ -7,12 +7,14 @@ import {connect} from 'react-redux';
 import Clock from 'react-live-clock';
 import AssignedMeetingsContainer from '../Containers/AssignedMeetingsContainer';
 
+const BACKGROUND_URL = "https://images.unsplash.com/photo-1539795845756-4fadad2905ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
 
 function DashCalendar(props) {
   const [value, onChange] = useState(new Date());
 
   return (
     <div>
+        <Background alt="background" src={BACKGROUND_URL} />
         {props.user.approved ? 
           <AssignedMeetingsContainer />
           :
@@ -27,7 +29,7 @@ function DashCalendar(props) {
             timezone={'America/New_York'}/>
           </ClockContainer>
           <Container>
-            <Calendar
+            <DashCal
               onChange={onChange}
               value={value}
             />
@@ -45,10 +47,28 @@ const msp = state => {
 
 export default connect(msp)(DashCalendar);
 
+const Background = styled.img`
+  width: 100%;
+  z-index: -1;
+`
+
+
+const DashCal = styled(Calendar)`
+  background-color: #EFEBE9;
+`
+
 const Container = styled.div`
-    float: right;
-    padding-top: 10%;
-    padding-right: 15%;
+    position: absolute;
+    right: 5%;
+    top: 18%;
+    opacity: 95%;
+    border-style: outset;
+    border-radius: 20%;
+    padding: 2%;
+    background-color: #C62828;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px grey;
+    z-index: 1;
 `
 
 const Header = styled.h3`
@@ -56,11 +76,22 @@ const Header = styled.h3`
     position: absolute;
     bottom: 30%;
     left: 40%;
+    z-index: 1;
 `
 
 const ClockContainer = styled.div`
-  float: left;
-  padding-top: 15%;
-  padding-left: 20%;
+  position: absolute;
+  right: 9%;
+  bottom: 8%;
+  padding: 2%;
   font-size: 40pt;
+  opacity: 95%;
+  background-color: #080002;
+  color: #CC3604;
+  text-shadow: 2px 2px 5px red;
+  border-style: double;
+  border-radius: 5%;
+  border-color: black;
+  box-shadow: 5px 5px 5px grey;
+  z-index: 1;
 `

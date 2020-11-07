@@ -6,7 +6,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -21,15 +20,22 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {signOutUser} from '../Redux/action'
+import {signOutUser} from '../Redux/action';
+import styled from 'styled-components';
 
-const drawerWidth = 240;
+
+
+const drawerWidth = 250;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
   appBar: {
+    minHeight: 75,
+    alignItems: 'flex-start',
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -44,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(5),
   },
   hide: {
     display: 'none',
@@ -55,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    background: '#EFEBE9', 
+    opacity: '80%',
+    color:"inherit",
   },
   drawerHeader: {
     display: 'flex',
@@ -133,6 +142,7 @@ function VolNavBar(props) {
       {signOut ? <Redirect to={"/"} /> : null }
       <CssBaseline />
       <AppBar
+        style={{ background: '#C62828' }}
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
@@ -140,6 +150,7 @@ function VolNavBar(props) {
       >
         <Toolbar>
           <IconButton
+            variant="dense"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -148,9 +159,9 @@ function VolNavBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Title>
             Welcome {props.user.name}!
-          </Typography>
+          </Title>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -169,33 +180,33 @@ function VolNavBar(props) {
         </div>
         <Divider />
         <List component="nav">
-         <ListItem button onClick={profileRedirect}>
+         <ListItem button onClick={profileRedirect} >
              <ListItemIcon>
-                 <AccountCircleIcon />
+                 <AccountCircleIcon color="inherit"/>
              </ListItemIcon>
-             <ListItemText primary="Profile" />
+             <ListItemText primary="Profile" color="inherit"/>
          </ListItem>
          <ListItem button onClick={dashboardRedirect}>
              <ListItemIcon>
-                 <DashboardIcon />
+                 <DashboardIcon color="inherit"/>
              </ListItemIcon>
-             <ListItemText primary="Dashboard" />
+             <ListItemText primary="Dashboard" color="inherit"/>
          </ListItem>
          {props.user.approved ? 
          <ListItem button onClick={meetingRedirect}>
              <ListItemIcon>
-                 <MeetingRoomIcon />
+                 <MeetingRoomIcon color="inherit"/>
              </ListItemIcon>
-             <ListItemText primary="Meet-Ups" />
+             <ListItemText primary="Meet-Ups" color="inherit"/>
          </ListItem> 
          :
          null
          }
          <ListItem button onClick={signOutHandle} >
              <ListItemIcon>
-                 <ExitToAppIcon />
+                 <ExitToAppIcon color="inherit"/>
              </ListItemIcon>
-             <ListItemText primary="Sign-Out" />
+             <ListItemText primary="Sign-Out" color="inherit"/>
          </ListItem>
         </List>
       </Drawer>
@@ -215,3 +226,7 @@ const mdp = (dispatch) => {
 }
 
 export default connect(msp, mdp)(VolNavBar);
+
+const Title = styled.h2`
+  font-family: Chalkduster, fantasy;
+`

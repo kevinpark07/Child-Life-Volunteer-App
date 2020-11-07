@@ -10,10 +10,10 @@ import MeetingNotes from '../Components/MeetingNotes';
 
 
 
+
 function VolunteerDashboard(props) {
   return (
    <div>
-     {console.log(props.user)}
        <VolNavBar />
        <Switch>
          {/* <Route path={'/volunteer/:id/edit'} render={() => <EditProfile /> } /> */}

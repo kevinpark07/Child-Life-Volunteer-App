@@ -57,7 +57,7 @@ const Background = styled.img`
 `
 const Title = styled.h1`
     position: absolute;
-    right: 15%;
+    right: 13%;
     top: 2%;
     font-family: Chalkduster, fantasy;
     color: #f44336;
