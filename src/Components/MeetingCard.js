@@ -25,12 +25,17 @@ export default connect(msp, null)(MeetingCard);
 
 const Container = styled.div`
     display: inline-block;
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     float: left;
-    margin-right: 3%;
-    border-style: solid;
-    padding: 10px;
+    margin: 2%;
+    padding-right: 3%;
+    padding-left: 2%;
+    padding-top: 2%;
+    padding-bottom: 2%;
     margin-bottom: 5%;
     overflow: scroll;
+    background-color:#EFEBE9;
+    opacity: 90%;
+    box-shadow: 5px 5px 5px 2px grey;
 `

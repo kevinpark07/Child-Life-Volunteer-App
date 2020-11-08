@@ -69,7 +69,7 @@ const Container = styled.div`
     display: inline-block;
     float: left;
     margin-left: 8%;
-    margin-right: 3%;
+    margin-right: 1%;
     margin-top: 2%;
     opacity: 100%;
     border-style: outset;
