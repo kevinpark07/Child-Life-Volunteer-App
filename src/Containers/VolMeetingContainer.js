@@ -18,7 +18,7 @@ const VolMeetingContainer = (props) => {
         <div>
             <Background alt="background" src={BACKGROUND} />
             <Container>
-                <Header>Completed Meet-Ups</Header>
+                <Header>Meet-Up</Header>
                 {renderMeetings()}
             </Container>
         </div>
@@ -43,6 +43,8 @@ const Container = styled.div`
     height: 100%;
     z-index: 1;
     width: 75%;
+    border-style: solid;
+    border-color: white;
     box-shadow: 5px 5px 5px 2px grey;
 `
 

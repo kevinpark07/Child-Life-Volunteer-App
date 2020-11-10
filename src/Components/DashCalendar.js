@@ -7,7 +7,9 @@ import {connect} from 'react-redux';
 import Clock from 'react-live-clock';
 import AssignedMeetingsContainer from '../Containers/AssignedMeetingsContainer';
 
-const BACKGROUND_URL = "https://images.unsplash.com/flagged/photo-1551277816-36355be656eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+
+const BACKGROUND_URL = "https://images.unsplash.com/photo-1599836818135-1ddc9c54fe8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+
 function DashCalendar(props) {
   const [value, onChange] = useState(new Date());
 
@@ -73,9 +75,14 @@ const Container = styled.div`
 const Header = styled.h3`
     text-align: center;
     position: absolute;
-    bottom: 30%;
-    left: 40%;
+    top: 30%;
+    left: 25%;
     z-index: 1;
+    font-family: Marker Felt, fantasy;
+    color: #EFEBE9;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 40pt;
+    text-decoration: underline;
 `
 
 const ClockContainer = styled.div`

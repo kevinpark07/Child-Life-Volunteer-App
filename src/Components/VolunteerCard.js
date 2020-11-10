@@ -34,14 +34,21 @@ export default connect(null, mdp)(VolunteerCard);
 
 const Container = styled.div`
     display: inline-block;
+    width: 300px;
+    height: 385px;
     float: left;
-    margin-right: 3%;
-    border-style: solid;
-    padding: 10px;
-    margin-bottom: 5%;
+    text-align: center;
+    margin-left: 7%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    overflow: scroll;
+    background-color:#EFEBE9;
+    opacity: 90%;
+    box-shadow: 5px 5px 5px 2px grey;
 `
 
 const Image = styled.img`
+    margin-top: 5%;
     width: 200px;
     height: 150px;
     border-radius: 7px;

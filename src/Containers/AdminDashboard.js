@@ -2,7 +2,7 @@ import React from 'react';
 import AdminNavBar from '../Components/AdminNavBar';
 import AdminDashCalendar from '../Components/AdminDashCalendar';
 import AdminProfile from '../Components/AdminProfile';
-import InterviewArchive from '../Components/InterviewArchive';
+import InterviewArchive from './InterviewArchive';
 import InterviewForm from '../Components/InterviewForm';
 import VolunteerList from '../Components/VolunteerList';
 import MeetingContainer from './MeetingsContainer';

@@ -23,12 +23,20 @@ export default connect(msp, null)(Interview);
 
 const Container = styled.div`
     display: inline-block;
-    width: 300px;
-    height: 250px;
+    width: 350px;
+    height: 350px;
     float: left;
-    margin-right: 3%;
-    border-style: solid;
-    padding: 10px;
+    margin-left: 5%;
+    padding-right: 3%;
+    padding-left: 2%;
+    padding-top: 2%;
+    padding-bottom: 2%;
     margin-bottom: 5%;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 2%;
     overflow: scroll;
+    background-color:#EFEBE9;
+    opacity: 90%;
+    box-shadow: 3px 3px 3px 1px grey;
 `

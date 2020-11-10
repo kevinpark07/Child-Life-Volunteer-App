@@ -42,7 +42,7 @@ const Container = styled.div`
     opacity: 95%;
     background-color: #C62828;
     border-style: groove;
-    border-radius: 5%;
+    border-radius: 2%;
     box-shadow: 10px 10px 5px grey;
 `
 const Header = styled.h1`

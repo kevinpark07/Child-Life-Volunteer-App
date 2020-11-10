@@ -28,7 +28,7 @@ const Container = styled.div`
     width: 350px;
     height: 350px;
     float: left;
-    margin: 2%;
+    margin-left: 5%;
     padding-right: 3%;
     padding-left: 2%;
     padding-top: 2%;

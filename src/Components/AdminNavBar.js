@@ -6,7 +6,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -23,15 +22,21 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListIcon from '@material-ui/icons/List';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import { signOutUser } from '../Redux/action'
+import { signOutUser } from '../Redux/action';
+import styled from 'styled-components';
 
-const drawerWidth = 240;
+
+const drawerWidth = 250;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
   appBar: {
+    minHeight: 75,
+    alignItems: 'flex-start',
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -57,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    background: '#EFEBE9', 
+    opacity: '80%',
+    color:"inherit",
   },
   drawerHeader: {
     display: 'flex',
@@ -152,6 +160,7 @@ function AdminNavBar(props) {
         
       <CssBaseline />
       <AppBar
+        style={{ background: '#1565C0' }}
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
@@ -159,6 +168,7 @@ function AdminNavBar(props) {
       >
         <Toolbar>
           <IconButton
+            variant="dense"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -167,9 +177,9 @@ function AdminNavBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Title>
             Welcome {props.user.name}!
-          </Typography>
+          </Title>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -190,39 +200,39 @@ function AdminNavBar(props) {
         <List component="nav">
          <ListItem button onClick={profileHandle}>
              <ListItemIcon>
-                 <AccountCircleIcon />
+                 <AccountCircleIcon color="inherit"/>
              </ListItemIcon>
-             <ListItemText primary="Profile" />
+             <ListItemText primary="Profile" color="inherit"/>
          </ListItem>
          <ListItem button onClick={dashHandle}>
              <ListItemIcon>
-                 <DashboardIcon />
+                 <DashboardIcon color="inherit"/>
              </ListItemIcon>
-             <ListItemText primary="Dashboard" />
+             <ListItemText primary="Dashboard" color="inherit"/>
          </ListItem>
          <ListItem button onClick={meetingHandle}>
              <ListItemIcon>
-                 <MeetingRoomIcon />
+                 <MeetingRoomIcon color="inherit"/>
              </ListItemIcon>
-             <ListItemText primary="Meet-Ups" />
+             <ListItemText primary="Meet-Ups" color="inherit"/>
          </ListItem>
          <ListItem button onClick={volunteerHandle}>
              <ListItemIcon>
-                 <ListIcon />
+                 <ListIcon color="inherit"/>
              </ListItemIcon>
-             <ListItemText primary="Volunteer Roster" />
+             <ListItemText primary="Volunteer Roster" color="inherit"/>
          </ListItem>
          <ListItem button onClick={archiveHandle}>
              <ListItemIcon>
-                 <HistoryIcon />
+                 <HistoryIcon color="inherit"/>
              </ListItemIcon>
-             <ListItemText primary="Interview Archive" />
+             <ListItemText primary="Interview Archive" color="inherit"/>
          </ListItem>
          <ListItem button onClick={signOutHandle} >
              <ListItemIcon>
-                 <ExitToAppIcon />
+                 <ExitToAppIcon color="inherit"/>
              </ListItemIcon>
-             <ListItemText primary="Sign-Out" />
+             <ListItemText primary="Sign-Out" color="inherit"/>
          </ListItem>
         </List>
       </Drawer>
@@ -242,3 +252,7 @@ const mdp = (dispatch) => {
   }
 
 export default connect(msp, mdp)(AdminNavBar);
+
+const Title = styled.h2`
+  font-family: Chalkduster, fantasy;
+`

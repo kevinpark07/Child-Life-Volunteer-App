@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { patchInterview, patchApproval } from '../Redux/action';
 import { Redirect } from 'react-router-dom';
+import { Button, TextareaAutosize, TextField, Switch, FormControlLabel } from '@material-ui/core';
 
+const BACKGROUND = "https://images.unsplash.com/photo-1573497491208-6b1acb260507?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
 
 const InterviewForm = (props) => {
 
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
+    const [date, setDate] = useState(props.interview.date);
+    const [time, setTime] = useState(props.interview.time);
     const [notes, setNotes] = useState("");
     const [approved, setApproved] = useState(false);
     const [redirect, setRedirect] = useState(false);
+    const [dropDown, setDropDown] = useState(false);
 
     const changeHandle = (event) => {
         if (event.target.name === "date") {
@@ -23,6 +26,10 @@ const InterviewForm = (props) => {
         } else if (event.target.name === "approved") {
             setApproved(!approved)
         }
+    }
+
+    const dropDownHandle = () => {
+        setDropDown(!dropDown)
     }
 
     const submitHandle = (event) => {
@@ -45,19 +52,95 @@ const InterviewForm = (props) => {
     let volunteer = props.volunteers.find(vol => vol.id === props.interview.volunteer_id)
 
     return(
-        <Container>
-            {redirect ? <Redirect to='/admin' /> : null}
-            <form onSubmit={submitHandle}>
-                {console.log(props.volunteers)}
-                <h1>Update Interview for {volunteer.name}</h1>
-                <p><input type="date" name="date" value={date} onChange={changeHandle} /></p>
-                <p><input type="time" name="time" value={time} onChange={changeHandle} /></p>
-                <p><Textarea name="notes" placeholder="Add Notes Here" value={notes} onChange={changeHandle} /></p>
-                <p><input type="checkbox" name="approved" value={approved} onChange={changeHandle} /><label><b>Approved?</b></label></p>
-                <br></br>
-                <p><button type="submit">Submit</button></p>
-            </form>
-        </Container>
+        <div>
+            <Background alt="background" src={BACKGROUND} />
+            <ChangeButton
+                    variant="contained" 
+                    onClick={dropDownHandle}
+                    color="default"
+                    size="small"
+                    > {dropDown ? "Change Date & Time" : "Add Notes & Approve"}
+            </ChangeButton>
+            <Container>
+                {redirect ? <Redirect to='/admin' /> : null}
+                <form onSubmit={submitHandle}>
+                    <Header>Interview for {volunteer.name}</Header>
+                    <p>
+                    {dropDown === false ? 
+                    <Input
+                        required  
+                        label="Date" 
+                        type="date" 
+                        name="date"
+                        variant="outlined"
+                        InputLabelProps={{
+                            shrink: true,
+                            }}
+                        value={date} 
+                        onChange={changeHandle}/>
+                    :
+                    null}
+                    </p>
+                    <p>
+                    { dropDown === false ?
+                    <Input
+                        required  
+                        label="Time" 
+                        type="time" 
+                        name="time"
+                        variant="outlined"
+                        InputLabelProps={{
+                            shrink: true,
+                            }}
+                        value={time} 
+                        onChange={changeHandle}/>
+                    :
+                    null}
+                    </p>
+                    <p>
+                    {dropDown ? 
+                    <Textarea
+                        required  
+                        placeholder="Add Interview Notes Here"
+                        rowsMin={5}
+                        rowsMax={10}  
+                        name="notes"
+                        variant="outlined"
+                        value={notes} 
+                        onChange={changeHandle}/>
+                    :
+                    null
+                    }
+                    </p>
+                    <p>
+                    {dropDown ? <FormControlLabel
+                        control={
+                        <Switch
+                            label="Approved ?"
+                            checked={approved}
+                            onChange={changeHandle}
+                            name="approved"
+                            value={approved}
+                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        />}
+                        label="Approved ?"
+                    />
+                    :
+                    null }
+                    </p>
+                    <br></br>
+                    <p>
+                        <Button 
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            >Update
+                        </Button>
+                    </p>
+                </form>
+            </Container>
+        </div>
     )
     
 }
@@ -81,16 +164,39 @@ const InterviewForm = (props) => {
 
     export default connect(msp, mdp)(InterviewForm);
 
+const Background = styled.img`
+    position: absolute;
+    width: 100%;
+    z-index: - 1;
+`
+
+const Input = styled(TextField)`
+    width: 400px;
+`
 
 const Container = styled.div`
     position: absolute;
-    left: 30%;
+    left: 37%;
     top: 30%;
     text-align: center;
-    width: 500px;
-    height: 300px;
+    z-index: 1;
+    border-style: outset;
+    background-color: #EFEBE9;
+    padding: 2%;
 `
-const Textarea = styled.textarea`
-    width: 75%;
-    height: 75px;
+const Textarea = styled(TextareaAutosize)`
+    width: 400px;
+`
+const ChangeButton = styled(Button)`
+    position: absolute;
+    left: 46%;
+    top: 25%;
+    z-index: 1;
+`
+const Header = styled.h1`
+    font-family: Marker Felt, fantasy;
+    text-align: center;
+    color: #1565C0;
+    text-decoration: underline;
+    margin-bottom: 10%;
 `

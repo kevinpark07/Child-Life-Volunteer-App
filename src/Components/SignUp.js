@@ -114,7 +114,8 @@ const SignUp = (props) => {
                     <br></br>
                 <TextField
                     required 
-                    label="Choose a Password"  
+                    label="Choose a Password" 
+                    type="password" 
                     name="password1"
                     variant="outlined"
                     value={password} 
@@ -124,7 +125,8 @@ const SignUp = (props) => {
                     <br></br>
                 <TextField
                     required 
-                    label="Re-Enter Password"  
+                    label="Re-Enter Password"
+                    type="password"  
                     name="password2"
                     variant="outlined"
                     value={secondPassword} 

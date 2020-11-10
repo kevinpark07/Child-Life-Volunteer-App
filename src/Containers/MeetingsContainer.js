@@ -5,12 +5,17 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AdminMeetingCard from '../Components/AdminMeetingCard';
 import styled from 'styled-components';
+import EditIcon from '@material-ui/icons/Edit';
+import AppsIcon from '@material-ui/icons/Apps';
+import Button from '@material-ui/core/Button';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
+const BACKGROUND = "https://images.unsplash.com/photo-1554188248-986adbb73be4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80";
 
 const MeetingContainer = (props) => {
 
     const [form, setForm] = useState(false);
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState("yyyy-mm-dd");
     const [time, setTime] = useState("");
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
@@ -24,7 +29,7 @@ const MeetingContainer = (props) => {
     }
 
     const clickHandle = () => {
-        setForm(!form)
+        setForm(!form);
     }
 
     const changeHandle = (event) => {
@@ -70,36 +75,124 @@ const MeetingContainer = (props) => {
     }
 
     return (
-        <Container>
-            <p><button onClick={clickHandle}>{form ? "Show All Meet-Ups" : "Create a Meet-Up"}</button></p>
-            {
-            form ? 
-                <Form onSubmit={submitHandle}>
-                    <StyledAutocomplete
-                    value={volunteer}
-                    onChange={(event, newVol) => {
-                    setVolunteer(newVol);
-                    }}
-                    inputValue={inputValue}
-                    onInputChange={(event, newInputValue) => {
-                    setInputValue(newInputValue);
-                    }}
-                    id="controllable-states-demo"
-                    options={approvedVols().map(vol => vol.name)}
-                    renderInput={(params) => <TextField {...params} label="Search Volunteer" variant="outlined" />}
-                />
-                    <p><b>Date </b><input type="date" name="date" value={date} onChange={changeHandle} /></p>
-                    <p><b>Time </b><input type="time" name="time" value={time} onChange={changeHandle} /></p>
-                    <p><b>Zoom Link </b><input type="text" name="link" placeholder="Enter Link Here" value={link} onChange={changeHandle} /></p>
-                    <p><b>Patient Name </b><input type="text" name="name" placeholder="Enter Name Here" value={name} onChange={changeHandle} /></p>
-                    <p><b>Patient Age </b><input type="number" name="age" placeholder="Enter Age Here" value={age} onChange={changeHandle} /></p>
-                    <p><TextArea type="text" name="info" placeholder="Enter Patient Information" value={info} onChange={changeHandle} /></p>
-                    <p><button type="submit">Create</button></p>
-                </Form>
+        <div>
+            <Background alt="background" src={BACKGROUND} />
+            <Container>
+                {form ? <Header>Assign New Meet-Up</Header> : <Header>Meet-Ups</Header>}
+                <p>
+                    { form ?
+                        <EditButton
+                            variant="contained"
+                            color="primary"
+                            size="medium"
+                            onClick={clickHandle}
+                            startIcon={<AppsIcon />}
+                        >Show All Meet-Ups
+                        </EditButton> 
                 :
-                renderMeetings()
-            }
-        </Container>
+                        <EditButton
+                            variant="contained"
+                            color="primary"
+                            size="medium"
+                            onClick={clickHandle}
+                            startIcon={<EditIcon />}
+                        >Create a Meet-Up   
+                        </EditButton>  }
+                </p>
+                {
+                form ? 
+                    <Form onSubmit={submitHandle}>
+                        <StyledAutocomplete
+                        value={volunteer}
+                        onChange={(event, newVol) => {
+                        setVolunteer(newVol);
+                        }}
+                        inputValue={inputValue}
+                        onInputChange={(event, newInputValue) => {
+                        setInputValue(newInputValue);
+                        }}
+                        id="volunteer search"
+                        options={approvedVols().map(vol => vol.name)}
+                        renderInput={(params) => <TextField {...params} label="Search Volunteer" variant="outlined" />}
+                    />
+                        <p>
+                        <Input
+                            required  
+                            label="Date" 
+                            type="date" 
+                            name="date"
+                            variant="outlined"
+                            InputLabelProps={{
+                                shrink: true,
+                              }}
+                            value={date} 
+                            onChange={changeHandle}/>
+                        </p>
+                        <p>
+                        <Input
+                            required  
+                            label="Time" 
+                            type="time" 
+                            name="time"
+                            variant="outlined"
+                            InputLabelProps={{
+                                shrink: true,
+                              }}
+                            value={time} 
+                            onChange={changeHandle}/>
+                        </p>
+                        <p>
+                        <Input
+                            required  
+                            label="Zoom Link"  
+                            name="link"
+                            variant="outlined"
+                            value={link} 
+                            onChange={changeHandle}/>
+                        </p>
+                        <p>
+                        <Input
+                            required  
+                            label="Patient Name"  
+                            name="name"
+                            variant="outlined"
+                            value={name} 
+                            onChange={changeHandle}/>
+                        </p>
+                        <p>
+                        <Input
+                            required  
+                            label="Patient Age"  
+                            name="age"
+                            type="number"
+                            variant="outlined"
+                            value={age} 
+                            onChange={changeHandle}/>
+                        </p>
+                        <p><Textarea
+                            required  
+                            placeholder="Enter Patient Information"
+                            rowsMin={5}
+                            rowsMax={10}  
+                            name="info"
+                            variant="outlined"
+                            value={info} 
+                            onChange={changeHandle}/>
+                        </p>
+                        <p><Button 
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            startIcon={<EditIcon />}
+                            >Create
+                        </Button></p>
+                    </Form>
+                    :
+                    renderMeetings()
+                }
+            </Container>
+        </div>
     )
 
 }
@@ -118,25 +211,63 @@ const mdp = dispatch => {
 
 export default connect(msp,mdp)(MeetingContainer);
 
+const Input = styled(TextField)`
+    width: 400px;
+`
+
+const Textarea = styled(TextareaAutosize)`
+    width: 400px;
+`
+
+const EditButton = styled(Button)`
+    postion: absolute;
+    left: 43%;
+    margin-bottom: 2%;
+`
+
+const Background = styled.img`
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    height: 120%;
+`
+
 const Container = styled.div`
     position: absolute;
-    top: 20%;
-    left: 20%;
-    width: 100%;
-    padding: 5%;
-    overflow: scroll;
+    top: 15%;
+    left: 15%;
+    overflow: auto;
+    height: 100%;
+    z-index: 1;
+    width: 75%;
+    border-style: solid;
+    border-color: white;
+    box-shadow: 5px 5px 5px 2px grey;
 `
 
 const Form = styled.form`
+    position: absolute;
+    left: 26%;
+    top: 25%;
     text-align: center;
     border-style: solid;
-`
-const TextArea = styled.textarea`
-    height: 100px;
-    width: 350px;
+    border-color: transparent;
+    border-radius: 2%;
+    width: 50%;
+    opacity: 95%;
+    box-shadow: 3px 3px 3px 1px grey;
+    background-color: #EFEBE9;
 `
 const StyledAutocomplete = styled(Autocomplete)`
-    width: 30%;
-    margin-left: 35%;
+    width: 400px;
+    margin-left: 19%;
     margin-top: 3%;
+`
+const Header = styled.h1`
+    font-family: Marker Felt, fantasy;
+    text-align: center;
+    color: #EFEBE9;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 40pt;
+    text-decoration: underline;
 `

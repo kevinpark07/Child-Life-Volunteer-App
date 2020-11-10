@@ -15,7 +15,7 @@ const InterviewContainer = (props) => {
 
     return (
         <Container>
-            {console.log(props.interviews)}
+            <Header>Pending Interviews</Header>
             {renderInterviews()}
         </Container>
     )
@@ -33,8 +33,23 @@ export default connect(msp)(InterviewContainer);
 
 const Container = styled.div`
     position: absolute;
-    bottom: 5%;
-    left: 20%;
-    width: 100%;
-    overflow: scroll;
+    top: 16%;
+    left: 11%;
+    width: 50%;
+    padding-bottom: 2%;
+    height: 100%;
+    overflow: auto;
+    opacity: 95%;
+    background-color: #1565C0;
+    border-style: groove;
+    border-radius: 2%;
+    box-shadow: 5px 5px 5px grey;
+`
+
+const Header = styled.h1`
+    font-family: Marker Felt, fantasy;
+    text-align: center;
+    color: #F3BB15;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 40pt;
 `

@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { patchMeeting } from '../Redux/action';
 import { Redirect } from 'react-router-dom';
+import { Button, TextareaAutosize } from '@material-ui/core';
 
+const BACKGROUND = "https://images.unsplash.com/photo-1583937912858-433447c0bcaf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
 
 const InterviewForm = (props) => {
 
@@ -29,16 +31,35 @@ const InterviewForm = (props) => {
 
 
     return(
-        <Container>
-            {redirect ? <Redirect to={`/volunteer/${props.user.id}/meetings`} /> : null}
-            <form onSubmit={submitHandle}>
-                {console.log(props.meeting)}
-                <h1>Add Notes for {props.meeting.patient_name} on {props.meeting.date}</h1>
-                <p><Textarea name="notes" placeholder="Add Notes Here" value={notes} onChange={changeHandle} /></p>
-                <br></br>
-                <p><button type="submit">Submit</button></p>
-            </form>
-        </Container>
+        <div>
+             <Background alt="background" src={BACKGROUND} />
+            <Container>
+                {redirect ? <Redirect to={`/volunteer/${props.user.id}/meetings`} /> : null}
+                <form onSubmit={submitHandle}>
+                    <Header>Post Meet-Up Notes: {props.meeting.patient_name}</Header>
+                    <Textarea
+                            required  
+                            placeholder="Add Meet-Up Notes Here"
+                            rowsMin={5}
+                            rowsMax={10}  
+                            name="notes"
+                            variant="outlined"
+                            value={notes} 
+                            onChange={changeHandle}/>
+                    <br></br>
+                    <br></br>
+                    <p>
+                        <Button 
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            >Add Notes
+                        </Button>
+                    </p>
+                </form>
+            </Container>
+        </div>
     )
     
 }
@@ -59,16 +80,30 @@ const InterviewForm = (props) => {
 
     export default connect(msp, mdp)(InterviewForm);
 
+const Background = styled.img`
+    position: absolute;
+    width: 100%;
+    z-index: - 1;
+`
 
 const Container = styled.div`
     position: absolute;
-    left: 30%;
-    top: 30%;
+    left: 35%;
+    top: 37%;
     text-align: center;
-    width: 500px;
-    height: 300px;
+    z-index: 1;
+    border-style: outset;
+    background-color: #EFEBE9;
+    padding: 2%;
 `
-const Textarea = styled.textarea`
-    width: 75%;
-    height: 75px;
+const Textarea = styled(TextareaAutosize)`
+    width: 450px;
+`
+
+const Header = styled.h1`
+    font-family: Marker Felt, fantasy;
+    text-align: center;
+    color: #1565C0;
+    text-decoration: underline;
+    margin-bottom: 7%;
 `
