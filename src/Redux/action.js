@@ -88,15 +88,14 @@ export const patchInterview = (interview, id) => {
     }
 };
 
-export const patchApproval = (approval, id) => {
+export const patchApproval = (formData, id) => {
     return function (dispatch) {
         fetch(VOLUNTEER_URL + id, {
             method: "PATCH",
             headers: {
-                "content-type": "application/json",
                 accepts: "application/json"
             },
-            body: JSON.stringify({approved: approval})
+            body: formData
         })
         .then(resp => resp.json())
         .then(volunteer => {
@@ -156,22 +155,20 @@ export const patchMeeting = (note, id) => {
 };
 
 
-
-// data => {dispatch({type: "REMOVE_VOLUNTEER", payload: data});}
-
-// export const editVol = (formData, id) => {
-//     return function (dispatch) {
-//         fetch(VOLUNTEER_URL + id, {
-//             method: "PATCH",
-//             headers: {
-//                 accepts: "application/json"
-//             },
-//             body: formData
-//         })
-//         .then(resp => resp.json())
-//         .then(newVol => {
-//             dispatch({type: "EDIT_VOLUNTEER", payload: newVol});
-//         })
-//     }
-// };
+export const editVol = (formData, id) => {
+    return function (dispatch) {
+        fetch(VOLUNTEER_URL + id, {
+            method: "PATCH",
+            headers: {
+                accepts: "application/json"
+            },
+            body: formData
+        })
+        .then(resp => resp.json())
+        .then(vol => {
+            dispatch({type: "EDIT_VOLUNTEER", payload: vol});
+            dispatch({ type: "LOGIN_USER", payload: vol });
+        })
+    }
+};
 

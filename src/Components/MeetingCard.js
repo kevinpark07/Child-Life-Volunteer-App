@@ -31,7 +31,7 @@ const Container = styled.div`
     margin-left: 5%;
     padding-right: 3%;
     padding-left: 2%;
-    padding-top: 2%;
+    padding-top: 1%;
     padding-bottom: 2%;
     margin-bottom: 5%;
     overflow: scroll;

@@ -49,7 +49,6 @@ const SignUp = (props) => {
         formData.append('email', email);
         formData.append('password', password);
         formData.append('profile_image', profileImage);
-        console.log(formData)
 
         if (password === secondPassword) {
             if (props.volunteers.find(vol => vol.email === email)) {

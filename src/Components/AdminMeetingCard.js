@@ -30,6 +30,7 @@ const Container = styled.div`
     height: 350px;
     float: left;
     margin-left: 5%;
+    margin-top: 2%;
     padding-right: 3%;
     padding-left: 2%;
     padding-top: 2%;

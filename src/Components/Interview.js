@@ -24,7 +24,7 @@ export default connect(msp, null)(Interview);
 const Container = styled.div`
     display: inline-block;
     width: 350px;
-    height: 350px;
+    height: 325px;
     float: left;
     margin-left: 5%;
     padding-right: 3%;

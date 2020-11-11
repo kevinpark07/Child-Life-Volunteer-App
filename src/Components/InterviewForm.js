@@ -39,11 +39,20 @@ const InterviewForm = (props) => {
             time: time, 
         }
         let noteObj = {notes: notes}
+
+        let formData = new FormData();
+        formData.append('name', volunteer.name);
+        formData.append('age', volunteer.age);
+        formData.append('email', volunteer.email);
+        formData.append('password', volunteer.password);
+        formData.append('profile_image', volunteer.profile_image);
+        formData.append('approved', approved);
+        
         if (notes === "") {
             props.submitHandler(dateTimeObj, props.interview.id);
         } else {
             props.submitHandler(noteObj, props.interview.id);
-            props.approveHandle(approved, props.interview.volunteer_id);
+            props.approveHandle(formData, props.interview.volunteer_id);
         }
 
         setRedirect(!redirect)
@@ -53,6 +62,7 @@ const InterviewForm = (props) => {
 
     return(
         <div>
+            {console.log(volunteer)}
             <Background alt="background" src={BACKGROUND} />
             <ChangeButton
                     variant="contained" 

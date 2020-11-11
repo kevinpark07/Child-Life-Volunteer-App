@@ -17,8 +17,8 @@ class InterviewArchive extends React.Component {
 
         <div>
             <Background alt="background" src={BACKGROUND} />
+            <Header>Archive</Header>
             <Container>
-                <Header>Archive</Header>
                 {this.renderInterviews()}
             </Container>
         </div>
@@ -37,27 +37,34 @@ export default connect(msp, null)(InterviewArchive);
 
 const Container = styled.div`
     position: absolute;
-    top: 15%;
-    left: 15%;
+    top: 25%;
+    left: 10%;
+    padding-top: 2%;
     overflow: auto;
     height: 100%;
     z-index: 1;
-    width: 75%;
+    width: 80%;
     border-style: solid;
     border-color: white;
     box-shadow: 5px 5px 5px 2px grey;
+    margin-bottom: 5%;
 `
 const Background = styled.img`
+    position: fixed;
     width: 100%;
     height: 100%;
     z-index: -1;
 `
 
 const Header = styled.h1`
+    position: absolute;
+    top: 10%;
+    left: 42%;
     font-family: Marker Felt, fantasy;
     text-align: center;
     color: #EFEBE9;
     text-shadow: 2px 2px 4px #000000;
     font-size: 40pt;
     text-decoration: underline;
+    z-index: 1;
 `

@@ -37,18 +37,19 @@ const Container = styled.div`
     left: 11%;
     width: 50%;
     padding-bottom: 2%;
-    height: 100%;
+    height: 78%;
     overflow: auto;
     opacity: 95%;
     background-color: #C62828;
     border-style: groove;
     border-radius: 2%;
     box-shadow: 10px 10px 5px grey;
+    margin-bottom: 5%;
 `
 const Header = styled.h1`
     font-family: Marker Felt, fantasy;
     text-align: center;
-    color: #F3BB15;
+    color: #EFEBE9;
     text-shadow: 2px 2px 4px #000000;
-    font-size: 40pt;
+    font-size: 30pt;
 `

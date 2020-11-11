@@ -27,6 +27,7 @@ const AdminProfile = (props) => {
 export default AdminProfile;
 
 const Background = styled.img`
+    position: fixed;
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -47,7 +48,7 @@ const Container = styled.div`
     position: absolute;
     text-align: left;
     right: 22%;
-    top: 40%;
+    top: 35%;
     font-size: 12pt;
     z-index: 1;
     padding: 2%;

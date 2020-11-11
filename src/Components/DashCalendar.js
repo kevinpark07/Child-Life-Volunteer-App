@@ -49,6 +49,7 @@ const msp = state => {
 export default connect(msp)(DashCalendar);
 
 const Background = styled.img`
+  position: fixed;
   width: 100%;
   z-index: -1;
 `
@@ -61,7 +62,7 @@ const DashCal = styled(Calendar)`
 const Container = styled.div`
     position: absolute;
     right: 5%;
-    top: 18%;
+    bottom: 7%;
     opacity: 95%;
     border-style: outset;
     border-radius: 20%;
@@ -88,7 +89,7 @@ const Header = styled.h3`
 const ClockContainer = styled.div`
   position: absolute;
   right: 9%;
-  bottom: 8%;
+  top: 20%;
   padding: 2%;
   font-size: 40pt;
   opacity: 95%;

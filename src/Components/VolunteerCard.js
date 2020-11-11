@@ -43,7 +43,6 @@ const Container = styled.div`
     margin-bottom: 2%;
     overflow: scroll;
     background-color:#EFEBE9;
-    opacity: 90%;
     box-shadow: 5px 5px 5px 2px grey;
 `
 

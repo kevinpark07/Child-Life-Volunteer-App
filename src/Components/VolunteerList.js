@@ -3,7 +3,7 @@ import VolunteerCard from './VolunteerCard'
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-const BACKGROUND = "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80";
+const BACKGROUND = "https://images.unsplash.com/photo-1596464716127-f2a82984de30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80";
 
 class VolunteerList extends React.Component {
 
@@ -16,8 +16,8 @@ class VolunteerList extends React.Component {
     return (
         <div>
             <Background alt="background" src={BACKGROUND} />
+            <Header>Volunteer Roster</Header>
             <Container>
-                <Header>Volunteer List</Header>
                 {this.renderVolunteers()}
             </Container>
         </div>
@@ -35,6 +35,7 @@ const msp = (state) => {
 export default connect(msp, null)(VolunteerList);
 
 const Background = styled.img`
+    position: fixed;
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -42,7 +43,7 @@ const Background = styled.img`
 
 const Container = styled.div`
     position: absolute;
-    top: 15%;
+    top: 25%;
     left: 15%;
     overflow: auto;
     height: 100%;
@@ -51,9 +52,13 @@ const Container = styled.div`
     width: 75%;
     border-style: inset;
     box-shadow: 5px 3px 5px 2px grey;
+    margin-bottom: 5%;
 `
 
 const Header = styled.h1`
+    position: absolute;
+    top: 10%;
+    left: 38%;
     font-family: Marker Felt, fantasy;
     text-align: center;
     color: #EFEBE9;

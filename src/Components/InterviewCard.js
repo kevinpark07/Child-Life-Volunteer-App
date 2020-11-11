@@ -68,7 +68,7 @@ export default connect(msp, mdp)(InterviewCard);
 const Container = styled.div`
     display: inline-block;
     float: left;
-    margin-left: 10%;
+    margin-left: 9%;
     margin-top: 3%;
     opacity: 100%;
     border-style: outset;

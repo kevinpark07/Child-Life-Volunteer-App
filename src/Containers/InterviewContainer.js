@@ -37,13 +37,14 @@ const Container = styled.div`
     left: 11%;
     width: 50%;
     padding-bottom: 2%;
-    height: 100%;
+    height: 78%;
     overflow: auto;
     opacity: 95%;
     background-color: #1565C0;
     border-style: groove;
     border-radius: 2%;
     box-shadow: 5px 5px 5px grey;
+    margin-bottom: 5%;
 `
 
 const Header = styled.h1`

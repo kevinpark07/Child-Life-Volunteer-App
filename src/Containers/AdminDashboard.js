@@ -6,7 +6,7 @@ import InterviewArchive from './InterviewArchive';
 import InterviewForm from '../Components/InterviewForm';
 import VolunteerList from '../Components/VolunteerList';
 import MeetingContainer from './MeetingsContainer';
-import {Switch, Route} from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 
 
@@ -14,6 +14,8 @@ import {connect} from 'react-redux';
 
 function AdminDashBoard(props) {
   return (
+   <>
+   { props.user ?
    <div>
        <AdminNavBar />
        <Switch>
@@ -31,6 +33,10 @@ function AdminDashBoard(props) {
        <Route path={'/admin'} render={() => <AdminDashCalendar />} />
        </Switch>
    </div>
+   :
+   <Redirect to="/" />
+  }
+   </>
   );
 }
 

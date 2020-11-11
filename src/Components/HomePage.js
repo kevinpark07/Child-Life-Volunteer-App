@@ -65,7 +65,7 @@ const Container = styled.div`
     z-index: 1;
 `
 const Background = styled.img`
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     z-index: - 1;

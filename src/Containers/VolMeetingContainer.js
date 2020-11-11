@@ -18,7 +18,7 @@ const VolMeetingContainer = (props) => {
         <div>
             <Background alt="background" src={BACKGROUND} />
             <Container>
-                <Header>Meet-Up</Header>
+                <Header>Meet-Ups</Header>
                 {renderMeetings()}
             </Container>
         </div>
@@ -38,17 +38,19 @@ export default connect(msp)(VolMeetingContainer);
 const Container = styled.div`
     position: absolute;
     top: 15%;
-    left: 15%;
+    left: 9%;
     overflow: auto;
     height: 100%;
     z-index: 1;
-    width: 75%;
+    width: 80%;
     border-style: solid;
     border-color: white;
     box-shadow: 5px 5px 5px 2px grey;
+    margin-bottom: 5%;
 `
 
 const Background = styled.img`
+    position: fixed;
     width: 100%;
     height: 100%;
     z-index: -1;

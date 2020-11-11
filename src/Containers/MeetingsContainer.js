@@ -77,8 +77,8 @@ const MeetingContainer = (props) => {
     return (
         <div>
             <Background alt="background" src={BACKGROUND} />
+            {form ? null : <Header>Meet-Ups</Header>}
             <Container>
-                {form ? <Header>Assign New Meet-Up</Header> : <Header>Meet-Ups</Header>}
                 <p>
                     { form ?
                         <EditButton
@@ -102,6 +102,7 @@ const MeetingContainer = (props) => {
                 {
                 form ? 
                     <Form onSubmit={submitHandle}>
+                        <FormHeader>Assign New Meet-Up</FormHeader>
                         <StyledAutocomplete
                         value={volunteer}
                         onChange={(event, newVol) => {
@@ -222,11 +223,10 @@ const Textarea = styled(TextareaAutosize)`
 const EditButton = styled(Button)`
     postion: absolute;
     left: 43%;
-    margin-bottom: 2%;
 `
 
 const Background = styled.img`
-    position: absolute;
+    position: fixed;
     width: 100%;
     z-index: -1;
     height: 120%;
@@ -234,21 +234,22 @@ const Background = styled.img`
 
 const Container = styled.div`
     position: absolute;
-    top: 15%;
-    left: 15%;
+    top: 25%;
+    left: 10%;
     overflow: auto;
     height: 100%;
     z-index: 1;
-    width: 75%;
+    width: 80%;
     border-style: solid;
     border-color: white;
     box-shadow: 5px 5px 5px 2px grey;
+    margin-bottom: 5%;
 `
 
 const Form = styled.form`
     position: absolute;
     left: 26%;
-    top: 25%;
+    top: 10%;
     text-align: center;
     border-style: solid;
     border-color: transparent;
@@ -257,6 +258,7 @@ const Form = styled.form`
     opacity: 95%;
     box-shadow: 3px 3px 3px 1px grey;
     background-color: #EFEBE9;
+    margin-bottom: 5%;
 `
 const StyledAutocomplete = styled(Autocomplete)`
     width: 400px;
@@ -264,10 +266,22 @@ const StyledAutocomplete = styled(Autocomplete)`
     margin-top: 3%;
 `
 const Header = styled.h1`
+    position: absolute;
+    top: 10%;
+    left: 42%;
     font-family: Marker Felt, fantasy;
     text-align: center;
     color: #EFEBE9;
     text-shadow: 2px 2px 4px #000000;
     font-size: 40pt;
+    text-decoration: underline;
+`
+
+const FormHeader = styled.h1`
+    font-family: Marker Felt, fantasy;
+    text-align: center;
+    color: #4287f5;
+    text-shadow: 2px 2px 4px #bac3d1;
+    font-size: 30pt;
     text-decoration: underline;
 `

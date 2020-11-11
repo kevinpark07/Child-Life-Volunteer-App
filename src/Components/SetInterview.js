@@ -9,13 +9,10 @@ import Modal from '@material-ui/core/Modal';
 
 const BACKGROUND_URL = "https://images.unsplash.com/photo-1560130958-0ea787c275de?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80";
 
-function rand() {
-    return Math.round(Math.random() * 20) - 10;
-  }
   
   function getModalStyle() {
-    const top = 50 + rand();
-    const left = 50 + rand();
+    const top = 50;
+    const left = 50;
   
     return {
       top: `${top}%`,

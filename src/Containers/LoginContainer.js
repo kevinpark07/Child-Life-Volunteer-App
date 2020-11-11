@@ -50,7 +50,7 @@ const Home = styled(HomeIcon)`
     zoom: 250%;
 `
 const Background = styled.img`
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     z-index: - 1;
