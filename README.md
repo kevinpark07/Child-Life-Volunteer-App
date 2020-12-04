@@ -1,6 +1,20 @@
-# Getting Started with Create React App
+# The Child Life Volunteer Portal
+
+The Child Life Volunteer Portal is a web application for Child Life administrators to set up virtual meet-ups with volunteers and patients at Children Hospitals. It also gives the administrators ability to set interviews and approve or deny potential volunteer candidates. 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Installation
+
+Set up the [backend](https://github.com/kevinpark07/ChildLife-App-API) running the 'rails server'. Then perform a 'npm install' and once the install is complete run 'npm start' to start the application.
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 
 ## Available Scripts
 
